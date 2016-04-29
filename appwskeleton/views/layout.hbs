@@ -4,55 +4,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='https://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Nunito:300,400' rel='stylesheet' type='text/css'>
-    <link href="stylesheets/bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles/style.css">
+    <!-- <link href="stylesheets/bootstrap.css" rel="stylesheet"> -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Mobile Specific Metas
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- FONT
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+    <!-- CSS
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="stylesheets/normalize.css">
+    <link rel="stylesheet" href="stylesheets/skeleton.css">
+
+    <link rel="stylesheet" href="stylesheets/style.css">
+
+
+    <!-- Favicon
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
 
     <title>{{title}}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-      <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand, logo" href="/">melody</a>
-          <div id="space">::::::::
-
-          </div>
+    <nav class="container">
+      <div class="row">
+        <div class="four columns">
+          <a href="/" class="logo">
+            melody
+          </a>
         </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li><a href="#">Browse Musicians</a></li>
-            <li><a href="#">Favorites</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">About</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Login</a></li>
-                <li><a href="#">Register</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">Settings</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
+        <div class="three columns">
+          <a class="navlink" href="#">Musicians</a>
+        </div>
+        <div class="offset by one column">
+        </div>
+        <div class="two columns">
+          <a class="navlink" href="#">About</a>
+        </div>
+        <div class="two columns">
+          <a class="navlink" href="#">Account</a>
+        </div>
+      </div>
     </nav>
+
     {{{body}}}
 
   </body>
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="javascripts/bootstrap.min.js"></script>
+  <script type="text/javascript" src="public/javascripts/app.js">
+
+  </script>
 </html>
