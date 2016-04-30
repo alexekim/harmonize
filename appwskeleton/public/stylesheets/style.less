@@ -1,5 +1,46 @@
+
+
+
+
+
+
+
+
+
+
+// ------------------------------------
+
+#bg{
+  z-index: -1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: url("../images/guitar.jpeg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  /* Preserve aspect ratio */
+  min-width: 100%;
+  min-height: 100%;
+}
+
+
+div{
+  border-right: 1px solid rgba(255, 255, 255, 0);
+  border-left: 1px solid rgba(255, 255, 255, 0);
+  border-top: 1px solid rgba(255, 255, 255, 0);
+  border-bottom: 1px solid rgba(255, 255, 255, 0);
+  // border-width: 1px;   /* defaults to medium */
+  // border-color: rgba(255, 255, 255, 0);   /* defaults to color (literally, the color property) */
+  // border-style: solid;
+}
+
+
 body{
   background-color: rgb(40, 42, 46);
+
 }
 
 .logo {
@@ -17,6 +58,9 @@ body{
   margin-top: 20px;
 }
 
+
+
+
 a {
   font-family: 'Nunito', sans-serif;
   font-size: 20px;
@@ -25,13 +69,6 @@ a {
 
 }
 
-div{
-  border: 2px solid white;
-}
-
-nav{
-
-}
 
 .landing{
   position: relative;
@@ -40,10 +77,10 @@ nav{
 
 .bannertext{
   position: absolute;
-   top: 50%;
-   left: 0;
-   width: 100%;
   text-align: center;
+  bottom: 50%;
+  // right: 2%;
+  width: 100%;
   font-family: 'Nunito', sans-serif;
   text-shadow: rgba(0,0,0,.01) 0 0 1px;
   color: white;
