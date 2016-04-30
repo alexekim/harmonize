@@ -1,6 +1,6 @@
 $('#regionA').attr('data-content', 0);
 $('#regionB').attr('data-content', 0);
-var contentAll = {regionA: [['drummer', 1000], ['violist', 1000], ['keyboardist', 1000], ['violinist', 1000], ['screamer', 1000], ['soprano', 1000], ['saxophonist', 1000], ['flutist', 1000], ['rockstar', 1000]]
+var contentAll = {regionA: [['drummer', 1000], ['violist', 1000], ['keyboardist', 1000], ['synthgod', 1000], ['violinist', 1000], ['pig squealer', 1000], ['soprano', 1000], ['saxophonist', 1000], ['flutist', 1000]]
 , regionB: [['etc 1', 1000], ['another 2', 1000], ['third', 1000]]};
 
 var changeRegion = function(id){
