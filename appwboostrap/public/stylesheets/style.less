@@ -8,12 +8,12 @@ body{
 a {
   font-family: 'Nunito', sans-serif;
   font-size: 20px;
+  color: white;
 }
 
 h2{
   font-family: 'Nunito', sans-serif;
   text-shadow: rgba(0,0,0,.01) 0 0 1px;
-  color: black;
 }
 h3{
   font-family: 'Nunito', sans-serif;
@@ -25,13 +25,48 @@ ul{
   list-style: none;
 }
 
+.navlinks{
+  margin-top: 7%;
+}
 
 //transparent bg for text clarity on top of images
 .foggyclarity{
   background-color: rgba(111, 119, 118, 0.3);
 }
+#violin{
+  z-index: -1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: url("../images/violin.jpeg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  /* Preserve aspect ratio */
+  min-width: 100%;
+  min-height: 100%;
+}
+
 
 // background image
+#bghome{
+  z-index: -1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: url("../images/guitar.jpeg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  /* Preserve aspect ratio */
+  min-width: 100%;
+  min-height: 100%;
+}
+
 #bghome{
   z-index: -1;
   position: fixed;
@@ -116,6 +151,7 @@ ul{
 
 // register marketing
 .regmktg{
+  // margin-left: 2px;
   font-family: 'Nunito', sans-serif;
   font-weight: bolder;
   color: black;
@@ -163,24 +199,11 @@ ul{
 }
 //pianist, cellist, guitarist, bassist
 #regionA{
-  // display: inline;
-  margin-top: 10%;
+  display: block;
+  // margin-top: 10%;
   // text-align: center;
   font-size: 18px;
   font-family: 'Nunito', sans-serif;
   text-shadow: rgba(0,0,0,.01) 0 0 1px;
   color: white;
 }
-
-
-// footer on layout.hbs
-.footer{
-  position:absolute;
-  background-color: rgba(34, 34, 34, .4);
-  font-family: 'Nunito', sans-serif;
-  color: white;
-  bottom:0px;
-  width: 100%;
-  margin: 0;
-  height: 30px;
-  }

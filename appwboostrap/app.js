@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var handlebars = require('hbs');
+var mongoose = require('mongoose');
 
 var controllers = require('./controllers/index');
 var users = require('./controllers/users');
@@ -26,6 +27,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+require('./db/database');
 
 app.use('/', controllers);
 // app.use('/musicians', musicians);
