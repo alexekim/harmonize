@@ -5,6 +5,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 var cors = require('cors');
 var handlebars = require('hbs');
 var mongoose = require('mongoose');
@@ -28,6 +29,15 @@ app.use(cookieParser());
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
+// SETTING UP SESSIONS FOR users
+// ==============================
+app.use(session({
+  secret: "suhdude",
+  resave: false,
+  saveUninitialized: false
+}));
+// END SESSSION SETUP
+// ==============================
 
 require('./db/database');
 
