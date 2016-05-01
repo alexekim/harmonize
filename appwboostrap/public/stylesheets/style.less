@@ -1,19 +1,59 @@
 //general:
 // ----------------------------------------------
+body{
+  font-family: 'Nunito', sans-serif;
+
+}
+
 a {
   font-family: 'Nunito', sans-serif;
   font-size: 20px;
 }
 
+h2{
+  font-family: 'Nunito', sans-serif;
+  text-shadow: rgba(0,0,0,.01) 0 0 1px;
+  color: black;
+}
+h3{
+  font-family: 'Nunito', sans-serif;
+  text-shadow: rgba(0,0,0,.01) 0 0 1px;
+  color: black;
+}
+
+ul{
+  list-style: none;
+}
+
+//transparent bg for text clarity on top of images
+.foggyclarity{
+  background-color: rgba(111, 119, 118, 0.3);
+}
 
 // background image
-#bg{
+#bghome{
   z-index: -1;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   background: url("../images/guitar.jpeg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  /* Preserve aspect ratio */
+  min-width: 100%;
+  min-height: 100%;
+}
+
+#bgloginregister{
+  z-index: -1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: url("../images/crowd.jpeg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -63,6 +103,7 @@ a {
   font-size: 36px;
 }
 
+// index banner
 .bannertext{
   margin-top: 10%;
   text-align: center;
@@ -70,6 +111,40 @@ a {
   font-family: 'Nunito', sans-serif;
   text-shadow: rgba(0,0,0,.01) 0 0 1px;
   color: white;
+}
+
+// register marketing
+.regmktg{
+  font-family: 'Nunito', sans-serif;
+  font-weight: bolder;
+  color: black;
+}
+#toggleloginreg{
+  font-family: 'Nunito', sans-serif;
+  font-weight: bolder;
+  font-size: 20px;
+  color: black;
+}
+#toggleloginreg:hover{
+  -o-transition:.5s;
+  -ms-transition:.5s;
+  -moz-transition:.5s;
+  -webkit-transition:.5s;
+  transition:.5s;
+  font-family: 'Nunito', sans-serif;
+  font-weight: bolder;
+  color: rgba(10, 179, 44, 1);
+}
+
+#waitgoback:hover{
+  -o-transition:.5s;
+  -ms-transition:.5s;
+  -moz-transition:.5s;
+  -webkit-transition:.5s;
+  transition:.5s;
+  font-family: 'Nunito', sans-serif;
+  font-weight: bolder;
+  color: rgba(10, 179, 44, 1);
 }
 
 
