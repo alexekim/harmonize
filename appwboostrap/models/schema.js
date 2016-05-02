@@ -8,12 +8,13 @@ var userSchema = new mongoose.Schema({
   picture: String,
   info: [{
     video: String,
+    location: String,
     name: String,
+    act: String,
     primary: String,
     secondary: String,
     links: String,
     aspirations: String,
-    location: String,
     genres: String,
     keywords: String
   }]
