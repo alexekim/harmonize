@@ -4,6 +4,8 @@ var UserAccount = require('../models/schema');
 var bcrypt = require('bcrypt');
 var Salt = bcrypt.genSaltSync(10);
 var dbSalt = bcrypt.genSaltSync(10);
+var methodOverride = require('method-override');
+
 
 /* GET users listing. */
 controller.get('/', function(req, res, next) {
@@ -11,23 +13,26 @@ controller.get('/', function(req, res, next) {
   res.render('loginregister', { title: 'melody: Register', greeting: 'suh dude' });
 });
 
+// LOGIN PAGE GET
+// ------------------------------------------------------------------
 controller.get('/login', function(req, res, next) {
   res.render('login', { title: 'melody: Login', greeting: 'suh dude' });
 });
 
-//JOSH LOGOUT
+// LOGOUT
 // ------------------------------------------------------------------
 controller.get('/logout', function(req, res, next) {
   // req.session.user = null;
   // res.json({ 'message': 'You have been logged out.'});
-  res.send('loggedout', {message: 'You have been logged out. Hope to see you soon.'})
+  res.send('loggedout', {title: 'melody: Logged Out', message: 'You have been logged out. Hope to see you soon.'})
 });
+// END LOGOUT
 // ------------------------------------------------------------------
 
 
 
 
-// JOSH Register
+// Register POST
 // ------------------------------------------------------------------
 controller.post('/register', function(req, res, next) {
   console.log(req.body.username);
@@ -36,15 +41,15 @@ controller.post('/register', function(req, res, next) {
       if (user) {
         if (user.username.toLowerCase() === req.body.username.toLowerCase()) {
           // res.json({'message': 'The username already exists'});
-          res.render('registererror', { message: 'The username already exists'  })
+          res.render('registererror', { title: 'Try Again', message: 'The username already exists'  })
 
         }
       } else if (req.body.passwordHash.length < 6) {
         // res.json({'message': 'The password is shorter than 6 characters'});
-        res.render('registererror', { message: 'The password is shorter than 6 characters'})
+        res.render('registererror', { title: 'Try Again', message: 'The password is shorter than 6 characters'})
       } else if (!regExp.test(req.body.passwordHash)) {
         // res.json({'message': 'Password must contain a special chracter(!@#$%^&*) and a number'});
-        res.render('registererror', { message: "Password must contain a special chracter(!@#$%^&*) and a number"})
+        res.render('registererror', { title: 'Try Again', message: "Password must contain a special chracter(!@#$%^&*) and a number"})
       } else {
         var user = new UserAccount({
           username: req.body.username,
@@ -54,51 +59,30 @@ controller.post('/register', function(req, res, next) {
           if (err) {
             return console.log(err);
           } else {
+            req.session.loggedIn = true;
+            req.session.currentUserId = user._id;
+            req.session.currentUser = user.username;
+            req.session.chartID;
+            var currentUser = user.username;
+            console.log("currentUser: " + currentUser);
+            console.log("req.session.loggedIn: " + req.session.loggedIn);
+            console.log("req.session.currentUserId: " + req.session.currentUserId);
+
             // res.json({'message': 'You have successfully registered an account!'})
             // res.redirect('/contribute', {message: "You have successfully registered an account!"} )
             // res.render('contribute', {message: "You have successfully registered an account!"} )
-            res.render('registersuccess', { message: "You have successfully registered an account!"  })
+            res.render('registersuccess', { title: 'Welcome', message: "Welcome to melody, " + req.body.username  })
           }
         });
       }
   });
 });
-// END JOSH registered
+// END register POST
 // ------------------------------------------------------------------
 
 
 
-
-
-// JOSH'S login
-// ------------------------------------------------------------------
-// controller.post('/login', function(req, res, next) {
-//   //bcrypt.compareSync
-//   var userInfo = {
-//     email: req.body.email,
-//     password: req.body.password
-//   };
-//   UserAccount.findOne({ username: new RegExp('^'+req.body.email+'$', "i")  }, function(err, user) {
-//     // if we find our user.. compare passwords!
-//     console.log(user)
-//     var isPasswordValid = bcrypt.compareSync(userInfo.password, user.passwordHash);
-//     if (isPasswordValid) {
-//       // log user in
-//       req.session.user = user.username;
-//       console.log(req.session);
-//       // res.json({ 'message': 'Logged in successfully'});
-//       res.render('registersuccess', {message: 'Thanks for logging in!'})
-//     } else {
-//       // res.json({ 'message': 'Invalid username and/or password'});
-//       res.render('registererror', {message: 'Invalid username and/or password'})
-//     }
-//   });
-// });
-
-// END JOSH login
-// ------------------------------------------------------------------
-
-// CAM login
+// LOGIN POST
 // ------------------------------------------------------------------
 controller.post('/login', function(req, res, next) {
   UserAccount.findOne({ email: req.body.email }, function(err, user) {
@@ -129,8 +113,50 @@ controller.post('/login', function(req, res, next) {
       }
   });
 })
-// END CAM login
+// END LOGIN POST
 // ------------------------------------------------------------------
+
+
+// EDIT PROFILE. UPDATE FUNCTION
+// ------------------------------------------------------------------
+controller.put('/update', function(req, res) {
+  console.log('update was clicked')
+  var userInfo = {
+    // username: req.body.username,
+    // email: req.body.email,
+    // password: bcrypt.hashSync(req.body.password, Salt),
+    // favorites: [],
+    // picture: String,
+    video: req.body.video,
+    location: req.body.location,
+    name: req.body.name,
+    act: req.body.act,
+    primary: req.body.primary,
+    secondary: req.body.secondary,
+    links: req.body.links,
+    aspirations: req.body.aspirations,
+    genres: req.body.genres,
+    keywords: req.body.keywords
+  };
+  console.log("userinfo: beforeupdate")
+  console.log(userInfo);
+  UserAccount.findOneAndUpdate({ username: req.session.currentUser }, userInfo, { new: true}, function (err, users) {
+    console.log('--------------------------------------------------------------------')
+    console.log(users)
+    console.log("line 145")
+    console.log(req.session.currentUser);
+    if (err) console.log(err);
+    console.log("userinfo:")
+    console.log(userInfo);
+    // req.session.user = userInfo.email;
+    console.log("userinfo:")
+    console.log(userInfo);
+    // res.send({ 'message': 'Account has been updated' })
+  })
+  // res.json('hi')
+//   res.render('index', { 'message': 'Account has been updated' })
+})
+
 
 
 module.exports = controller;

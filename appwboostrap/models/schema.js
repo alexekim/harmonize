@@ -1,12 +1,11 @@
 var mongoose = require('mongoose');
 
 var userSchema = new mongoose.Schema({
-  username: String,
-  email: String,
-  passwordHash: String,
-  favorites: [],
-  picture: String,
-  info: [{
+    username: String,
+    email: String,
+    passwordHash: String,
+    favorites: [],
+    picture: String,
     video: String,
     location: String,
     name: String,
@@ -17,8 +16,7 @@ var userSchema = new mongoose.Schema({
     aspirations: String,
     genres: String,
     keywords: String
-  }]
-})
+  })
 
 var User = mongoose.model('User', userSchema);
 

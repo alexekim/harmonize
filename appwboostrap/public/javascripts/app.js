@@ -1,6 +1,7 @@
 $(document).ready(function(){
   console.log("the window is loaded")
   $('.login').hide();
+  $('#youtubediv').hide();
 });
 
 // Front Page:
@@ -35,4 +36,15 @@ $("#toggleloginreg").on("click", function(){
 $("#waitgoback").on("click", function(){
   $('.login').fadeOut();
   $('.register').delay(500).fadeIn();
+})
+
+
+//============================================================
+// Youtube helper toggle
+$("#youtubeguide").on("click", function(){
+  $("#youtubediv").slideDown();
+})
+
+$("#youtubediv").on("click", function(){
+  $("#youtubediv").slideUp();
 })
