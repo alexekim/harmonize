@@ -116,7 +116,7 @@ controller.post('/login', function(req, res, next) {
         console.log("Welcome to the site, "+ currentUser);
         // res.redirect('/charts/build');
         // res.send("Welcome to the site, "+ currentUser)
-        res.render('registersuccess', {message: 'Thank you for logging in.'})
+        res.render('loginsuccess', {message: 'Thank you for logging in.'})
       } else {
           console.log("The username or password you entered was incorrect.");
           // res.redirect('/login');
