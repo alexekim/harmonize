@@ -24,7 +24,7 @@ controller.get('/login', function(req, res, next) {
 controller.get('/logout', function(req, res, next) {
   // req.session.user = null;
   // res.json({ 'message': 'You have been logged out.'});
-  res.send('loggedout', {title: 'melody: Logged Out', message: 'You have been logged out. Hope to see you soon.'})
+  res.render('loggedout', {title: 'melody: Logged Out', message: 'You have been logged out. Hope to see you soon.'})
 });
 // END LOGOUT
 // ------------------------------------------------------------------
@@ -117,6 +117,17 @@ controller.post('/login', function(req, res, next) {
 // ------------------------------------------------------------------
 
 
+// ------------------------------------------------------------------
+// GET for UPDATE PROFILE
+// ------------------------------------------------------------------
+controller.get('/updateprofileform', function(req, res, next) {
+  res.render('yourprofile', { title: 'melody: Login', greeting: 'suh dude' });
+});
+// END
+// ------------------------------------------------------------------
+
+
+
 // EDIT PROFILE. UPDATE FUNCTION
 // ------------------------------------------------------------------
 controller.put('/update', function(req, res) {
@@ -143,17 +154,29 @@ controller.put('/update', function(req, res) {
   UserAccount.findOneAndUpdate({ username: req.session.currentUser }, userInfo, { new: true}, function (err, users) {
     console.log('--------------------------------------------------------------------')
     console.log(users)
-    console.log("line 145")
+    console.log('req.session:')
+    console.log(req.session);
+    console.log('req.session.currentUser:')
     console.log(req.session.currentUser);
+    currentUser = req.session.currentUser;
     if (err) console.log(err);
     console.log("userinfo:")
     console.log(userInfo);
-    // req.session.user = userInfo.email;
-    console.log("userinfo:")
-    console.log(userInfo);
-    // res.send({ 'message': 'Account has been updated' })
+    video = userInfo.video;
+    console.log("userInfo.video")
+    console.log(userInfo.video)
+    location = userInfo.location;
+    name = userInfo.name;
+    act = userInfo.act;
+    primary = userInfo.primary;
+    secondary = userInfo.secondary;
+    links = userInfo.links;
+    aspirations = userInfo.aspirations;
+    genres = userInfo.genres;
+    keywords = userInfo.keywords;
+    res.render('yourprofile', { currentUser: currentUser, video: video, location: location, name: name, act: act, primary: primary, secondary: secondary, links: links, aspirations: aspirations, genres: genres, keywords: keywords })
   })
-  // res.json('hi')
+  // res.json(userInfo);
 //   res.render('index', { 'message': 'Account has been updated' })
 })
 
