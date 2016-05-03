@@ -122,7 +122,7 @@ controller.post('/login', function(req, res, next) {
         console.log("Welcome to the site, "+ currentUser);
         // res.redirect('/charts/build');
         // res.send("Welcome to the site, "+ currentUser)
-        res.render('loginsuccess', {message: 'Thank you for logging in.'})
+        res.render('loginsuccess', {message: 'Thank you for logging in, ' + req.session.currentUser })
       } else {
           console.log("The username or password you entered was incorrect.");
           // res.redirect('/login');
@@ -143,8 +143,24 @@ controller.post('/login', function(req, res, next) {
 // GET for UPDATE PROFILE
 // ------------------------------------------------------------------
 controller.get('/updateprofileform', function(req, res, next) {
-  res.render('registersuccess', { title: 'melody: Login', greeting: 'suh dude' });
+  UserAccount.findOne({ username: req.session.currentUser }, function(err, docs) {
+    if (!err){
+      console.log("----------docs start-------------")
+      console.log(docs);
+      console.log("----------docs end-------------")
+      // res.json("hi")
+      res.render('registersuccess', { title: 'melody: Login', message: "Welcome to melody, " + req.session.currentUser  });
+    } else {
+      throw err;
+    res.render('error', {message: 'Profile not found'});
+  }
 });
+})
+
+
+  // UserAccount.findOne({ username: req.session.currentUser }, function(err, docs) {
+  // res.render('registersuccess', { title: 'melody: Login', message: "Welcome to melody, " + req.body.username  });
+// });
 // END
 // ------------------------------------------------------------------
 
@@ -200,6 +216,21 @@ controller.put('/update', function(req, res) {
   })
   // res.json(userInfo);
 //   res.render('index', { 'message': 'Account has been updated' })
+})
+
+
+
+controller.get('/profile', function(req, res, next) {
+  UserAccount.findOne({ username: req.session.currentUser }, function(err, docs) {
+    if (!err){
+        console.log(docs);
+        // process.exit();
+        res.json(docs);
+    } else {
+      throw err;
+    res.json('bye');
+  }
+});
 })
 
 
