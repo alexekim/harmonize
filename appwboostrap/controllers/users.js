@@ -22,10 +22,26 @@ controller.get('/login', function(req, res, next) {
 // LOGOUT
 // ------------------------------------------------------------------
 controller.get('/logout', function(req, res, next) {
-  // req.session.user = null;
-  // res.json({ 'message': 'You have been logged out.'});
-  res.render('loggedout', {title: 'melody: Logged Out', message: 'You have been logged out. Hope to see you soon.'})
-});
+  console.log('before logout:')
+  console.log(req.session);
+  console.log("req.session.loggedIn :" + req.session.loggedIn)
+  if (req.session.loggedIn === true) {
+    req.session.loggedIn = null;
+    req.session.currentUserId = null;
+    req.session.currentUser = null;
+    console.log('after logout')
+    console.log(req.session);
+    console.log('You have been logged out.');
+    res.render('loggedout', {title: 'melody: Logged Out', message: 'You have been logged out. Hope to see you soon.'})
+  } else {
+    res.render('loggedout', {title: 'melody: Logged Out', message: 'You have been logged out. Hope to see you soon.'})
+  }
+})
+// controller.get('/logout', function(req, res, next) {
+//   // req.session.user = null;
+//   // res.json({ 'message': 'You have been logged out.'});
+//   res.render('loggedout', {title: 'melody: Logged Out', message: 'You have been logged out. Hope to see you soon.'})
+// });
 // END LOGOUT
 // ------------------------------------------------------------------
 
@@ -64,10 +80,16 @@ controller.post('/register', function(req, res, next) {
             req.session.currentUser = user.username;
             req.session.chartID;
             var currentUser = user.username;
+            console.log("--------------------------------------------------------")
+            console.log("req.session: START")
+            console.log(req.session)
+            console.log("req.session: END")
+            console.log("--------------------------------------------------------")
             console.log("currentUser: " + currentUser);
             console.log("req.session.loggedIn: " + req.session.loggedIn);
             console.log("req.session.currentUserId: " + req.session.currentUserId);
-
+            console.log("req.session.chartID: " + req.session.chartID);
+            console.log("--------------------------------------------------------")
             // res.json({'message': 'You have successfully registered an account!'})
             // res.redirect('/contribute', {message: "You have successfully registered an account!"} )
             // res.render('contribute', {message: "You have successfully registered an account!"} )
@@ -121,7 +143,7 @@ controller.post('/login', function(req, res, next) {
 // GET for UPDATE PROFILE
 // ------------------------------------------------------------------
 controller.get('/updateprofileform', function(req, res, next) {
-  res.render('yourprofile', { title: 'melody: Login', greeting: 'suh dude' });
+  res.render('registersuccess', { title: 'melody: Login', greeting: 'suh dude' });
 });
 // END
 // ------------------------------------------------------------------
@@ -181,5 +203,37 @@ controller.put('/update', function(req, res) {
 })
 
 
+// LIST ALL MUSICIANS
+// ------------------------------------------------------------------
+controller.get('/all', function(req, res, next) {
+  UserAccount.find({}, function(err, docs) {
+    if (!err){
+        console.log(docs);
+        // process.exit();
+        res.json(docs);
+    } else {
+      throw err;
+    res.json('bye');
+  }
+});
+})
+// END
+// ------------------------------------------------------------------
+
+// LIST ONE MUSICIAN BY ID
+// ------------------------------------------------------------------
+// controller.get('/all', function(req, res, next){
+//   UserAccount.findOne
+// })
+
+
+// DELETE
+// controller.delete('/delete', function(req, res) {
+//   User.findOneAndRemove({ email: req.session.user }, req.session, function(err, user) {
+//     if (err) console.log(err);
+//     res.json({ 'message': 'Account has been deleted' })
+//   })
+// })
+//END
 
 module.exports = controller;
