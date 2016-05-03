@@ -1,38 +1,33 @@
-<img id="violin" alt="">
+<img id="bwguitar" alt="">
 
-<p>
-  currentUser: {{currentUser}}
-</p>
-
-<p>
-  video: {{video}}
-</p>
-<p>
-  location: {{location}}
-</p>
-<p>
-  name: {{name}}
-</p>
-<p>
-  act: {{act}}
-</p>
-<p>
-  primary: {{primary}}
-</p>
-<p>
-  secondary: {{secondary}}
-</p>
-<p>
-  links: {{links}}
-</p>
-<p>
-  aspirations: {{aspirations}}
-</p>
-<p>
-  genres: {{genres}}
-</p>
-<p>
-  keywords: {{keywords}}
-</p>
-
-<a href="/users/updateprofileform">Go back to edit your profile</a>
+<div style="margin-bottom: 5%;" class="container foggyclarity">
+  <div class="row">
+    <div class="col-sm-12">
+      <h3>Your profile:</h3>
+      <h1 class="green foggyclarity">{{username}}</h1>
+      <h3>{{name}}, {{location}}</h3>
+      <br>
+      <h4>Current Projects: {{act}}</h4>
+      <h4>genres: {{genres}}</h4>
+      <br>
+      example:
+      <br>
+      {{{video}}}
+      <br>
+      <h3>Primary Instruments:</h3>
+        <p>{{primary}}</p>
+      <h4>Secondary Instruments:</h4>
+        <p>{{secondary}}</p>
+      <br>
+      <h5>External Links:</h5>
+        <p>
+          {{links}}
+        </p>
+      <h5>Keywords</h5>
+        <p>
+          {{keywords}}
+        </p>
+        <a href="/users/updateprofileform">Go back to edit your profile</a>
+    </div>
+  </div>
+</div>

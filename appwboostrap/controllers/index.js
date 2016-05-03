@@ -12,9 +12,6 @@ controller.get('/hey', function(req, res, next) {
 
 controller.get('/settings', function(req, res, next){
   if (req.session.loggedIn === true) {
-    req.session.loggedIn = null;
-    req.session.currentUserId = null;
-    req.session.currentUser = null;
     res.render('settings', {title: 'Settings', message: 'You have been logged out. Hope to see you soon.'})
   } else {
     res.render('pleaselogin', {title: 'Settings', message: 'Please log in or register first'})

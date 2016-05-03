@@ -148,8 +148,34 @@ controller.get('/updateprofileform', function(req, res, next) {
       console.log("----------docs start-------------")
       console.log(docs);
       console.log("----------docs end-------------")
+      var username = docs.username;
+      var video = docs.video;
+      var location = docs.location;
+      var name = docs.name;
+      var act = docs.act;
+      var primary = docs.primary;
+      var secondary = docs.secondary;
+      var links = docs.links;
+      var aspirations = docs.aspirations;
+      var genres = docs.genres;
+      var keywords = docs.keywords;
+
       // res.json("hi")
-      res.render('registersuccess', { title: 'melody: Login', message: "Welcome to melody, " + req.session.currentUser  });
+      res.render('registersuccess', {
+        title: 'melody: Login',
+        message: "Welcome to melody, " + req.session.currentUser,
+         username: username,
+         video: video,
+         location: location,
+         name: name,
+         act: act,
+         primary: primary,
+         secondary: secondary,
+         links: links,
+         aspirations: aspirations,
+         genres: genres,
+         keywords: keywords
+    });
     } else {
       throw err;
     res.render('error', {message: 'Profile not found'});
@@ -212,7 +238,9 @@ controller.put('/update', function(req, res) {
     aspirations = userInfo.aspirations;
     genres = userInfo.genres;
     keywords = userInfo.keywords;
-    res.render('yourprofile', { currentUser: currentUser, video: video, location: location, name: name, act: act, primary: primary, secondary: secondary, links: links, aspirations: aspirations, genres: genres, keywords: keywords })
+    // res.send(userInfo);
+    // res.render('yourprofile', { currentUser: currentUser, video: video, location: location, name: name, act: act, primary: primary, secondary: secondary, links: links, aspirations: aspirations, genres: genres, keywords: keywords })
+    res.redirect('/users/profile')
   })
   // res.json(userInfo);
 //   res.render('index', { 'message': 'Account has been updated' })
@@ -224,8 +252,21 @@ controller.get('/profile', function(req, res, next) {
   UserAccount.findOne({ username: req.session.currentUser }, function(err, docs) {
     if (!err){
         console.log(docs);
-        // process.exit();
-        res.json(docs);
+        console.log(docs.username);
+        var username = docs.username;
+        var video = docs.video;
+        var location = docs.location;
+        var name = docs.name;
+        var act = docs.act;
+        var primary = docs.primary;
+        var secondary = docs.secondary;
+        var links = docs.links;
+        var aspirations = docs.aspirations;
+        var genres = docs.genres;
+        var keywords = docs.keywords;
+
+        // res.json(docs);
+        res.render('yourprofile', { username: username, video: video, location: location, name: name, act: act, primary: primary, secondary: secondary, links: links, aspirations: aspirations, genres: genres, keywords: keywords })
     } else {
       throw err;
     res.json('bye');

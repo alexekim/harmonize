@@ -13,7 +13,7 @@
 
       <form class="form-group" action="/users/update" method="post">
         <input type="hidden" name="_method" value="put">
-        <label><p>Youtube Video of yourself playing.</p>
+        <label><h3>Youtube Video of yourself playing.</h3>
           <p> Must input the 'Embed Link' provided by Youtube.<span id="youtubeguide"> Help?</span></p>
           <div>
             <img id="youtubediv" src="http://s32.postimg.org/ao30pl07p/Screen_Shot_2016_05_02_at_3_11_38_PM.png" alt="" />
@@ -21,49 +21,59 @@
               Share -> Embed -> Copy Provided Link
             </p>
           </div>
+          <p>{{video}}</p>
         <input class="profileupdate form-control" type="text" name="video" placeholder="<iframe width='420' height='315' src='https://www.youtube.com/embed/6Tfa4-3WCXQ' frameborder='0' allowfullscreen></iframe>"></label>
         <br />
         <br />
-        <label><p>Location</p>
+        <label><h3>Location</h3>
+          <p>{{location}}</p>
         <input class="profileupdate form-control" type="text" name="location" placeholder="Leschi, Seattle, Washington" ></label>
         <br />
         <br />
 
-        <label><p>Name</p>
+        <label><h3>Name</h3>
+          <p>{{name}}</p>
         <input class="profileupdate form-control" type="text" name="name" placeholder="Kurt Cobain" ></label>
         <br />
         <br />
-        <label><p>Name of Act (if different)</p>
+        <label><h3>Name of Act (if different)</h3>
+          <p>{{act}}</p>
         <input class="profileupdate form-control" type="text" name="act" placeholder="Nirvana" ></label>
         <br />
         <br />
-        <label><p>Primary Instrument</p>
+        <label><h3>Primary Instrument</h3>
+          <p>{{primary}}</p>
         <input class="profileupdate form-control" type="text" name="primary" placeholder="Voice" ></label>
         <br />
         <br />
-        <label><p>Secondary Instrument</p>
+        <label><h3>Secondary Instrument</h3>
+          <p>{{secondary}}</p>
         <input class="profileupdate form-control" type="text" name="secondary" placeholder="Guitar" ></label>
         <br />
         <br />
-        <label><p>External Links</p>
+        <label><h3>External Links</h3>
+          <p>{{links}}</p>
         <input class="profileupdate form-control" type="text" name="links" placeholder="Bandcamp, Soundcloud, MySpace" ></label>
         <br />
         <br />
-        <label><p>Aspirations</p>
+        <label><h3>Aspirations</h3>
+          <p>{{aspirations}}</p>
         <input class="profileupdate form-control" type="text" name="aspirations" placeholder="Make it Big" ></label>
         <br />
         <br />
-        <label><p>Genre(s)</p>
+        <label><h3>Genre(s)</h3>
+          <p>{{genres}}</p>
         <input class="profileupdate form-control" type="text" name="genres" placeholder="Grunge" ></label>
         <br />
         <br />
-        <label><p>Keywords</p>
+        <label><h3>Keywords</h3>
+          <p>{{keywords}}</p>
         <input class="profileupdate form-control" type="text" name="keywords" placeholder="heavy, electric, fender, rock, grunge" ></label>
         <br />
         <br />
         <button class="btn btn-primary profileupdate" type="submit">Submit</button>
-
-        <!-- <input class="btn btn-success profileupdate" style="margin-bottom: 15%;" type="submit" value="Submit"> -->
+        <br>
+        <button style="margin-bottom: 10%; width: 10em;" class="btn btn-danger" id="cancelupdate" type="button" name="button">Cancel</button>
       </form>
       </div>
       <div class="col-sm-5">

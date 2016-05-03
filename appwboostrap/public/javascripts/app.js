@@ -27,3 +27,14 @@ $("#youtubeguide").on("click", function(){
 $("#youtubediv").on("click", function(){
   $("#youtubediv").slideUp();
 })
+
+//============================================================
+// explore button click -> browse MUSICIANS
+$("#explorebtn").on("click", function(){
+  window.location.href='/users/all';
+})
+
+
+$("#cancelupdate").on("click", function(){
+  window.location.href='/users/profile';
+})
