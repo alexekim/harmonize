@@ -60,17 +60,17 @@ controller.post('/register', function(req, res, next) {
       if (user) {
         if (user.username.toLowerCase() === req.body.username.toLowerCase()) {
           // res.json({'message': 'The username already exists'});
-          res.render('registererror', { check: check, title: 'Try Again', message: 'The username already exists'  })
+          res.render('loginregister', { check: check, title: 'Try Again', message: 'The username already exists'  })
 
         }
       } else if (req.body.passwordHash.length < 6) {
         check = req.session.currentUser;
         // res.json({'message': 'The password is shorter than 6 characters'});
-        res.render('registererror', { check: check, title: 'Try Again', message: 'The password is shorter than 6 characters'})
+        res.render('loginregister', { check: check, title: 'Try Again', message: 'The password is shorter than 6 characters'})
       } else if (!regExp.test(req.body.passwordHash)) {
         check = req.session.currentUser;
         // res.json({'message': 'Password must contain a special chracter(!@#$%^&*) and a number'});
-        res.render('registererror', { check: check, title: 'Try Again', message: "Password must contain a special chracter(!@#$%^&*) and a number"})
+        res.render('loginregister', { check: check, title: 'Try Again', message: "Password must contain a special chracter(!@#$%^&*) and a number"})
       } else {
         var user = new UserAccount({
           username: req.body.username,
@@ -133,12 +133,12 @@ controller.post('/login', function(req, res, next) {
       } else {
           console.log("The username or password you entered was incorrect.");
           // res.redirect('/login');
-          res.send("The username or password you entered was incorrect.")
+          res.render('login', {message: "The username or password you entered was incorrect."})
       }
     } else {
         console.log("User doesn't exist.");
         // res.redirect('/register');
-        res.send('user doesnot exist')
+        res.render('login', {message: 'Username does not exist'})
       }
   });
 })
@@ -269,7 +269,7 @@ controller.put('/favorite', function(req, res){
 
     // console.log(req.session.currentUser + " added: " fave.fave + " to favorites");
     if (err) console.log(err);
-    res.send(fave);
+    res.send(fave + "has been added to " + req.session.currentUser + "'s favorite list.");
   })
 })
 // ------------------------------------------------------------------
@@ -297,10 +297,11 @@ controller.get('/profile', function(req, res, next) {
         var aspirations = docs.aspirations;
         var genres = docs.genres;
         var keywords = docs.keywords;
-        check = req.session.currentUser;
+        var favorites = docs.favorites;
+        var check = req.session.currentUser;
 
         // res.json(docs);
-        res.render('yourprofile', { check:check, username: username, video: video, location: location, name: name, act: act, primary: primary, secondary: secondary, links: links, aspirations: aspirations, genres: genres, keywords: keywords })
+        res.render('yourprofile', { check:check, favorites: favorites, username: username, video: video, location: location, name: name, act: act, primary: primary, secondary: secondary, links: links, aspirations: aspirations, genres: genres, keywords: keywords })
         }
     } else {
       // throw err;
@@ -318,7 +319,8 @@ controller.get('/all', function(req, res, next) {
         console.log(docs);
         // res.json(docs);
         // res.render('browse', { message: docs[1].username})
-        res.render('browse', { musicians: docs})
+        check = req.session.currentUser;
+        res.render('browse', { musicians: docs, check: check})
     } else {
       // throw err;
       res.json('bye');

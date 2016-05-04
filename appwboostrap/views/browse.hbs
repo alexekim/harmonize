@@ -1,4 +1,4 @@
-<img id="sax" alt="">
+<img id="record" alt="">
 
 {{#each musicians}}
 <div class="container">
@@ -9,9 +9,10 @@
     <div class="col-sm-10">
       <h2>{{this.username}}: {{this.name}}, of {{this.act}}</h2>
       <h4>{{this.location}}</h4>
-      <h5>Plays: {{this.primary}}{{this.secondary}}</h5>
+      <h5>Plays: {{this.primary}}</h5>
+      <h6>Also plays: {{this.secondary}}</h6>
       <h5>Aspirations: {{this.aspirations}}</h5>
-      <p>{{this.keywords}}</p>
+      <p>Keywords: {{this.keywords}}</p>
       <p>
         <a href="/users/{{username}}">See More</a>
       </p>
