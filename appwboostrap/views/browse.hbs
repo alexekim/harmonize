@@ -1,0 +1,24 @@
+{{#each musicians}}
+<div class="container">
+  <div style="background-color: rgb(85, 214, 148); margin: 5%;" class="row" id="eachmusician">
+    <div class="col-sm-2">
+      <div style="position: absolute; top: 50%;"><img id="browsepreview" src="/images/squarealex.png" alt="" /></div>
+    </div>
+    <div class="col-sm-10">
+      <h2>{{this.username}}: {{this.name}}, of {{this.act}}</h2>
+      <h4>{{this.location}}</h4>
+      <h5>Plays: {{this.primary}}{{this.secondary}}</h5>
+      <h5>Aspirations: {{this.aspirations}}</h5>
+      <p>{{this.keywords}}</p>
+      <p>
+        <a href="/users/{{username}}">See More</a>
+      </p>
+
+    </div>
+  </div>
+</div>
+
+<!-- <h2>{{{this.video}}}</h2> -->
+<!-- <h2>{{this.genres}}</h2>
+<h2>{{this.links}}</h2> -->
+{{/each}}

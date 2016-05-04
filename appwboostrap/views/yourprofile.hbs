@@ -1,33 +1,49 @@
-<img id="bwguitar" alt="">
+<img id="amp" alt="">
 
-<div style="margin-bottom: 5%;" class="container foggyclarity">
+<div class="container">
   <div class="row">
-    <div class="col-sm-12">
-      <h3>Your profile:</h3>
-      <h1 class="green foggyclarity">{{username}}</h1>
-      <h3>{{name}}, {{location}}</h3>
-      <br>
-      <h4>Current Projects: {{act}}</h4>
-      <h4>genres: {{genres}}</h4>
-      <br>
-      example:
-      <br>
-      {{{video}}}
-      <br>
-      <h3>Primary Instruments:</h3>
-        <p>{{primary}}</p>
-      <h4>Secondary Instruments:</h4>
-        <p>{{secondary}}</p>
-      <br>
-      <h5>External Links:</h5>
-        <p>
-          {{links}}
-        </p>
-      <h5>Keywords</h5>
-        <p>
-          {{keywords}}
-        </p>
-        <a href="/users/updateprofileform">Go back to edit your profile</a>
+    <div class="row-sm-12">
+      <h1 class="usernamedisplay">{{username}}</h1>
+      <div class="circleimage">
+        <img class="innerimg" src="/images/squarealex.png" alt="" />
+      </div>
     </div>
   </div>
 </div>
+
+<div style="background-color: beige;" class="container profileinfo">
+  <div class="row">
+    <div style="background-color: rgba(83, 74, 224, 0.3);" class="col-sm-3">
+      <h3>{{name}}</h3>
+      <h3>{{location}}</h3>
+      <h5>Aspirations:</h5>
+      <p>
+        {{aspirations}}
+      </p>
+      <h5>Links:</h5>
+      <p>
+        {{links}}
+      </p>
+      <h5>Keywords:</h5>
+      <p>
+        {{keywords}}
+      </p>
+    </div>
+    <div style="background-color: rgba(152, 254, 175, 0.6);" class="col-sm-9">
+      HEY
+    </div>
+  </div>
+
+</div>
+
+
+
+{{username}}
+{{name}}
+{{location}}
+{{genres}}
+{{{video}}}
+{{links}}
+{{keywords}}
+{{primary}}
+{{secondary}}

@@ -9,14 +9,16 @@ var methodOverride = require('method-override');
 
 /* GET users listing. */
 controller.get('/', function(req, res, next) {
+  check = req.session.currentUser;
   // res.send('HEY HEY HEY BABY');
-  res.render('loginregister', { title: 'melody: Register', greeting: 'suh dude' });
+  res.render('loginregister', { check: check, title: 'melody: Register', greeting: 'suh dude' });
 });
 
 // LOGIN PAGE GET
 // ------------------------------------------------------------------
 controller.get('/login', function(req, res, next) {
-  res.render('login', { title: 'melody: Login', greeting: 'suh dude' });
+  check = req.session.currentUser;
+  res.render('login', { check:check, title: 'melody: Login', greeting: 'suh dude' });
 });
 
 // LOGOUT
@@ -51,21 +53,24 @@ controller.get('/logout', function(req, res, next) {
 // Register POST
 // ------------------------------------------------------------------
 controller.post('/register', function(req, res, next) {
+  check = req.session.currentUser;
   console.log(req.body.username);
   UserAccount.findOne({ username: new RegExp('^'+req.body.username+'$', "i")}, function(err, user) {
       var regExp = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,100}$/;
       if (user) {
         if (user.username.toLowerCase() === req.body.username.toLowerCase()) {
           // res.json({'message': 'The username already exists'});
-          res.render('registererror', { title: 'Try Again', message: 'The username already exists'  })
+          res.render('registererror', { check: check, title: 'Try Again', message: 'The username already exists'  })
 
         }
       } else if (req.body.passwordHash.length < 6) {
+        check = req.session.currentUser;
         // res.json({'message': 'The password is shorter than 6 characters'});
-        res.render('registererror', { title: 'Try Again', message: 'The password is shorter than 6 characters'})
+        res.render('registererror', { check: check, title: 'Try Again', message: 'The password is shorter than 6 characters'})
       } else if (!regExp.test(req.body.passwordHash)) {
+        check = req.session.currentUser;
         // res.json({'message': 'Password must contain a special chracter(!@#$%^&*) and a number'});
-        res.render('registererror', { title: 'Try Again', message: "Password must contain a special chracter(!@#$%^&*) and a number"})
+        res.render('registererror', { check: check, title: 'Try Again', message: "Password must contain a special chracter(!@#$%^&*) and a number"})
       } else {
         var user = new UserAccount({
           username: req.body.username,
@@ -79,6 +84,7 @@ controller.post('/register', function(req, res, next) {
             req.session.currentUserId = user._id;
             req.session.currentUser = user.username;
             req.session.chartID;
+            check = req.session.currentUser;
             var currentUser = user.username;
             console.log("--------------------------------------------------------")
             console.log("req.session: START")
@@ -93,7 +99,7 @@ controller.post('/register', function(req, res, next) {
             // res.json({'message': 'You have successfully registered an account!'})
             // res.redirect('/contribute', {message: "You have successfully registered an account!"} )
             // res.render('contribute', {message: "You have successfully registered an account!"} )
-            res.render('registersuccess', { title: 'Welcome', message: "Welcome to melody, " + req.body.username  })
+            res.render('registersuccess', { check: check, title: 'Welcome', message: "Welcome to melody, " + req.body.username  })
           }
         });
       }
@@ -122,7 +128,8 @@ controller.post('/login', function(req, res, next) {
         console.log("Welcome to the site, "+ currentUser);
         // res.redirect('/charts/build');
         // res.send("Welcome to the site, "+ currentUser)
-        res.render('loginsuccess', {message: 'Thank you for logging in, ' + req.session.currentUser })
+        check = req.session.currentUser;
+        res.render('loginsuccess', {check: check, message: 'Thank you for logging in, ' + req.session.currentUser })
       } else {
           console.log("The username or password you entered was incorrect.");
           // res.redirect('/login');
@@ -148,6 +155,7 @@ controller.get('/updateprofileform', function(req, res, next) {
       console.log("----------docs start-------------")
       console.log(docs);
       console.log("----------docs end-------------")
+      if(docs.username)
       var username = docs.username;
       var video = docs.video;
       var location = docs.location;
@@ -159,11 +167,13 @@ controller.get('/updateprofileform', function(req, res, next) {
       var aspirations = docs.aspirations;
       var genres = docs.genres;
       var keywords = docs.keywords;
+      check = req.session.currentUser;
 
       // res.json("hi")
       res.render('registersuccess', {
         title: 'melody: Login',
         message: "Welcome to melody, " + req.session.currentUser,
+        check: check,
          username: username,
          video: video,
          location: location,
@@ -177,7 +187,7 @@ controller.get('/updateprofileform', function(req, res, next) {
          keywords: keywords
     });
     } else {
-      throw err;
+      // throw err;
     res.render('error', {message: 'Profile not found'});
   }
 });
@@ -197,11 +207,6 @@ controller.get('/updateprofileform', function(req, res, next) {
 controller.put('/update', function(req, res) {
   console.log('update was clicked')
   var userInfo = {
-    // username: req.body.username,
-    // email: req.body.email,
-    // password: bcrypt.hashSync(req.body.password, Salt),
-    // favorites: [],
-    // picture: String,
     video: req.body.video,
     location: req.body.location,
     name: req.body.name,
@@ -238,6 +243,7 @@ controller.put('/update', function(req, res) {
     aspirations = userInfo.aspirations;
     genres = userInfo.genres;
     keywords = userInfo.keywords;
+    check = req.session.currentUser;
     // res.send(userInfo);
     // res.render('yourprofile', { currentUser: currentUser, video: video, location: location, name: name, act: act, primary: primary, secondary: secondary, links: links, aspirations: aspirations, genres: genres, keywords: keywords })
     res.redirect('/users/profile')
@@ -251,6 +257,10 @@ controller.put('/update', function(req, res) {
 controller.get('/profile', function(req, res, next) {
   UserAccount.findOne({ username: req.session.currentUser }, function(err, docs) {
     if (!err){
+        if (docs === null){
+          res.render('error', {message: "you're probably not logged in anymore"})
+        }
+        else{
         console.log(docs);
         console.log(docs.username);
         var username = docs.username;
@@ -264,11 +274,13 @@ controller.get('/profile', function(req, res, next) {
         var aspirations = docs.aspirations;
         var genres = docs.genres;
         var keywords = docs.keywords;
+        check = req.session.currentUser;
 
         // res.json(docs);
-        res.render('yourprofile', { username: username, video: video, location: location, name: name, act: act, primary: primary, secondary: secondary, links: links, aspirations: aspirations, genres: genres, keywords: keywords })
+        res.render('yourprofile', { check:check, username: username, video: video, location: location, name: name, act: act, primary: primary, secondary: secondary, links: links, aspirations: aspirations, genres: genres, keywords: keywords })
+        }
     } else {
-      throw err;
+      // throw err;
     res.json('bye');
   }
 });
@@ -281,23 +293,52 @@ controller.get('/all', function(req, res, next) {
   UserAccount.find({}, function(err, docs) {
     if (!err){
         console.log(docs);
-        // process.exit();
-        res.json(docs);
+        // res.json(docs);
+        // res.render('browse', { message: docs[1].username})
+        res.render('browse', { musicians: docs})
     } else {
-      throw err;
-    res.json('bye');
-  }
-});
+      // throw err;
+      res.json('bye');
+    }
+  });
 })
 // END
 // ------------------------------------------------------------------
 
 // LIST ONE MUSICIAN BY ID
 // ------------------------------------------------------------------
-// controller.get('/all', function(req, res, next){
-//   UserAccount.findOne
-// })
+controller.get('/:id', function(req,res, next){
+  UserAccount.findOne({ username: req.params.id }, function(err, docs){
 
+    if(!err){
+      console.log(docs);
+      if (docs === null ){
+        res.render('error', {message: "Sorry, that is inaccessible."})
+      }
+      else{
+
+      var username = docs.username;
+      var video = docs.video;
+      var location = docs.location;
+      var name = docs.name;
+      var act = docs.act;
+      var primary = docs.primary;
+      var secondary = docs.secondary;
+      var links = docs.links;
+      var aspirations = docs.aspirations;
+      var genres = docs.genres;
+      var keywords = docs.keywords;
+      check = req.session.currentUser;
+      // res.json(docs);
+      res.render('yourprofile', {check: check, username: username, video: video, location: location, name: name, act: act, primary: primary, secondary: secondary, links: links, aspirations: aspirations, genres: genres, keywords: keywords })
+    }
+    }
+    else{
+      // throw err;
+      res.json('bye');
+    }
+  })
+})
 
 // DELETE
 // controller.delete('/delete', function(req, res) {
