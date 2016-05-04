@@ -270,6 +270,7 @@ controller.put('/favorite', function(req, res){
     // console.log(req.session.currentUser + " added: " fave.fave + " to favorites");
     if (err) console.log(err);
     res.send(fave + "has been added to " + req.session.currentUser + "'s favorite list.");
+    // res.redirect('backURL', {message: req.body.username + " has been added to favorites"})
   })
 })
 // ------------------------------------------------------------------
