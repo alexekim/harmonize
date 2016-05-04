@@ -4,6 +4,13 @@
   <div class="row">
     <div class="row-sm-12">
       <h1 class="usernamedisplay">{{username}}</h1>
+
+      <form class="form-group" action="/users/favorite" method="post">
+        <input type="hidden" name="_method" value="put">
+        <input type="hidden" name="username" value="{{username}}">
+        <button class="btn btn-success" id="favorite" type="submit">Favorite</button>
+      </form>
+
       <div class="circleimage">
         <img class="innerimg" src="/images/squarealex.png" alt="" />
       </div>

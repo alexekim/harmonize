@@ -34,7 +34,13 @@ $("#explorebtn").on("click", function(){
   window.location.href='/users/all';
 })
 
-
+// cancel the update form and return to profile
 $("#cancelupdate").on("click", function(){
   window.location.href='/users/profile';
 })
+
+
+// //============================================================
+// $("#favorite").on("click", function(){
+//   window.location.href=''
+// })

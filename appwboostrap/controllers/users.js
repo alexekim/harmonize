@@ -251,6 +251,29 @@ controller.put('/update', function(req, res) {
   // res.json(userInfo);
 //   res.render('index', { 'message': 'Account has been updated' })
 })
+// END
+
+// ------------------------------------------------------------------
+//add to favorites
+controller.put('/favorite', function(req, res){
+  console.log('--------------------')
+  console.log(req.body);
+  console.log(req.body.username);
+  console.log('--------------------')
+  var fave = req.body.username;
+  console.log(fave);
+
+  UserAccount.findOneAndUpdate({ username: req.session.currentUser }, {$push: {favorites: fave}}, {safe: true, upsert: true}, function(err, users){
+    console.log("users:::::" + users);
+    console.log('--------------------')
+
+    // console.log(req.session.currentUser + " added: " fave.fave + " to favorites");
+    if (err) console.log(err);
+    res.send(fave);
+  })
+})
+// ------------------------------------------------------------------
+
 
 
 
