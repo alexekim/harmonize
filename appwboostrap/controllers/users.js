@@ -56,6 +56,7 @@ controller.post('/register', function(req, res, next) {
   check = req.session.currentUser;
   console.log(req.body.username);
   UserAccount.findOne({ username: new RegExp('^'+req.body.username+'$', "i")}, function(err, user) {
+      console.log('thank you, josh');
       var regExp = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,100}$/;
       if (user) {
         if (user.username.toLowerCase() === req.body.username.toLowerCase()) {
@@ -168,7 +169,6 @@ controller.get('/updateprofileform', function(req, res, next) {
       var genres = docs.genres;
       var keywords = docs.keywords;
       check = req.session.currentUser;
-
       // res.json("hi")
       res.render('registersuccess', {
         title: 'melody: Login',
@@ -262,6 +262,7 @@ controller.put('/favorite', function(req, res){
   console.log('--------------------')
   var fave = req.body.username;
   console.log(fave);
+  check = req.session.currentUser;
 
   UserAccount.findOneAndUpdate({ username: req.session.currentUser }, {$push: {favorites: fave}}, {safe: true, upsert: true}, function(err, users){
     console.log("users:::::" + users);
@@ -269,8 +270,16 @@ controller.put('/favorite', function(req, res){
 
     // console.log(req.session.currentUser + " added: " fave.fave + " to favorites");
     if (err) console.log(err);
-    res.send(fave + "has been added to " + req.session.currentUser + "'s favorite list.");
-    // res.redirect('backURL', {message: req.body.username + " has been added to favorites"})
+    back = '/users/'+req.body.username
+    console.log(back)
+    check = req.session.currentUser;
+      backURL=req.header('Referer') || '/';
+      res.redirect(backURL);
+    // res.send(fave + "has been added to " + req.session.currentUser + "'s favorite list.");
+    // res.redirect(back, {message: req.body.username + " has been added to favorites"})
+    // res.redirect(back)
+    // res.render(back, { check: check, message: req.body.username + " has been added to favorites"})
+
   })
 })
 // ------------------------------------------------------------------
