@@ -14,6 +14,39 @@ controller.get('/', function(req, res, next) {
   res.render('loginregister', { check: check, title: 'melody: Register', greeting: 'suh dude' });
 });
 
+
+
+// viewing current user's favorites list
+controller.get('/favorites', function(req, res, next) {
+  console.log('-----------------loggedin?--------')
+  console.log(req.session.loggedIn);
+  if (req.session.loggedIn == false){
+    res.json('uhhh');
+  } else {
+    UserAccount.findOne({ username: req.session.currentUser}, function(err, docs){
+      if(!err){
+        if(docs === null){
+          res.render('error', {message: "Please login or register to use Favorites"})
+        }
+        else {
+          // console.log('START docs')
+          // console.log(docs);
+          // console.log('END docs');
+          favorites = docs.favorites;
+          console.log('START favorites');
+          console.log(favorites);
+          console.log('END favorites')
+          check = req.session.currentUser;
+          res.render('favorites', {check: check, favorites: favorites});
+        }
+      } else{
+        res.json('bye');
+      }
+    });
+  }
+});
+
+
 // LOGIN PAGE GET
 // ------------------------------------------------------------------
 controller.get('/login', function(req, res, next) {
@@ -245,7 +278,7 @@ controller.put('/update', function(req, res) {
     keywords = userInfo.keywords;
     check = req.session.currentUser;
     // res.send(userInfo);
-    // res.render('yourprofile', { currentUser: currentUser, video: video, location: location, name: name, act: act, primary: primary, secondary: secondary, links: links, aspirations: aspirations, genres: genres, keywords: keywords })
+    // res.render('yourprofileace', { currentUser: currentUser, video: video, location: location, name: name, act: act, primary: primary, secondary: secondary, links: links, aspirations: aspirations, genres: genres, keywords: keywords })
     res.redirect('/users/profile')
   })
   // res.json(userInfo);
@@ -285,9 +318,8 @@ controller.put('/favorite', function(req, res){
 
 
 
-
+// viewing the current user's profile
 controller.get('/profile', function(req, res, next) {
-
   UserAccount.findOne({ username: req.session.currentUser }, function(err, docs) {
     if (!err){
         if (docs === null){
@@ -311,7 +343,7 @@ controller.get('/profile', function(req, res, next) {
         var check = req.session.currentUser;
 
         // res.json(docs);
-        res.render('yourprofile', { check:check, favorites: favorites, username: username, video: video, location: location, name: name, act: act, primary: primary, secondary: secondary, links: links, aspirations: aspirations, genres: genres, keywords: keywords })
+        res.render('yourprofileace', { check:check, favorites: favorites, username: username, video: video, location: location, name: name, act: act, primary: primary, secondary: secondary, links: links, aspirations: aspirations, genres: genres, keywords: keywords })
         }
     } else {
       // throw err;
@@ -365,7 +397,7 @@ controller.get('/:id', function(req,res, next){
       var keywords = docs.keywords;
       check = req.session.currentUser;
       // res.json(docs);
-      res.render('yourprofile', {check: check, username: username, video: video, location: location, name: name, act: act, primary: primary, secondary: secondary, links: links, aspirations: aspirations, genres: genres, keywords: keywords })
+      res.render('yourprofileace', {check: check, username: username, video: video, location: location, name: name, act: act, primary: primary, secondary: secondary, links: links, aspirations: aspirations, genres: genres, keywords: keywords })
     }
     }
     else{

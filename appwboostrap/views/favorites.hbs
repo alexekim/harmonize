@@ -1,0 +1,19 @@
+<img id="tape" alt="">
+
+<div class="container">
+  <div class="row">
+    <div style="background-color: rgba(170, 111, 191, 0.6);" class="col-md-12">
+
+
+
+      <h1>Your Favorites:</h1>
+      <h2 class="foggyclarity">Favorites:</h2>
+        {{#each favorites}}
+        <a href="/users/{{this}}">{{this}}</a><br>
+        {{/each}}
+
+
+
+    </div>
+  </div>
+</div>
