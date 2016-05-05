@@ -263,7 +263,6 @@ controller.put('/favorite', function(req, res){
   var fave = req.body.username;
   console.log(fave);
   check = req.session.currentUser;
-
   UserAccount.findOneAndUpdate({ username: req.session.currentUser }, {$push: {favorites: fave}}, {safe: true, upsert: true}, function(err, users){
     console.log("users:::::" + users);
     console.log('--------------------')
@@ -288,6 +287,7 @@ controller.put('/favorite', function(req, res){
 
 
 controller.get('/profile', function(req, res, next) {
+
   UserAccount.findOne({ username: req.session.currentUser }, function(err, docs) {
     if (!err){
         if (docs === null){

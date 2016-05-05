@@ -1,3 +1,5 @@
+// dan hates jquery
+
 $(document).ready(function(){
   console.log("the window is loaded")
   $('.login').hide();
@@ -41,6 +43,7 @@ $("#cancelupdate").on("click", function(){
 
 
 // //============================================================
-// $("#favorite").on("click", function(){
-//   window.location.href=''
-// })
+$("#favorite").on("click", function(){
+  $("#favorite").css('width', '200px');
+  $("#favorite").html("Added to Favorites! &#x2714;");
+})
