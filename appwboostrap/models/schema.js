@@ -15,7 +15,8 @@ var userSchema = new mongoose.Schema({
     links: String,
     aspirations: String,
     genres: String,
-    keywords: String
+    keywords: String,
+    images: String
   })
 
 var User = mongoose.model('User', userSchema);

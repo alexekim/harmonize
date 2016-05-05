@@ -201,6 +201,7 @@ controller.get('/updateprofileform', function(req, res, next) {
       var aspirations = docs.aspirations;
       var genres = docs.genres;
       var keywords = docs.keywords;
+      var images = docs.images;
       check = req.session.currentUser;
       // res.json("hi")
       res.render('registersuccess', {
@@ -217,7 +218,8 @@ controller.get('/updateprofileform', function(req, res, next) {
          links: links,
          aspirations: aspirations,
          genres: genres,
-         keywords: keywords
+         keywords: keywords,
+         images: images
     });
     } else {
       // throw err;
@@ -240,6 +242,7 @@ controller.get('/updateprofileform', function(req, res, next) {
 controller.put('/update', function(req, res) {
   console.log('update was clicked')
   var userInfo = {
+    images: req.body.images,
     video: req.body.video,
     location: req.body.location,
     name: req.body.name,
@@ -251,22 +254,24 @@ controller.put('/update', function(req, res) {
     genres: req.body.genres,
     keywords: req.body.keywords
   };
-  console.log("userinfo: beforeupdate")
-  console.log(userInfo);
+  // console.log("userinfo: beforeupdate")
+  // console.log(userInfo);
   UserAccount.findOneAndUpdate({ username: req.session.currentUser }, userInfo, { new: true}, function (err, users) {
-    console.log('--------------------------------------------------------------------')
+    console.log('----------------------------------users----------------------------------')
     console.log(users)
-    console.log('req.session:')
-    console.log(req.session);
-    console.log('req.session.currentUser:')
-    console.log(req.session.currentUser);
-    currentUser = req.session.currentUser;
+    console.log('----------------------------------end users----------------------------------')
+
+    // console.log('req.session:')
+    // console.log(req.session);
+    // console.log('req.session.currentUser:')
+    // console.log(req.session.currentUser);
+    // currentUser = req.session.currentUser;
     if (err) console.log(err);
-    console.log("userinfo:")
-    console.log(userInfo);
+    // console.log("userinfo:")
+    // console.log(userInfo);
     video = userInfo.video;
-    console.log("userInfo.video")
-    console.log(userInfo.video)
+    // console.log("userInfo.video")
+    // console.log(userInfo.video)
     location = userInfo.location;
     name = userInfo.name;
     act = userInfo.act;
@@ -276,6 +281,7 @@ controller.put('/update', function(req, res) {
     aspirations = userInfo.aspirations;
     genres = userInfo.genres;
     keywords = userInfo.keywords;
+    images = userInfo.images
     check = req.session.currentUser;
     // res.send(userInfo);
     // res.render('yourprofileace', { currentUser: currentUser, video: video, location: location, name: name, act: act, primary: primary, secondary: secondary, links: links, aspirations: aspirations, genres: genres, keywords: keywords })
@@ -340,10 +346,11 @@ controller.get('/profile', function(req, res, next) {
         var genres = docs.genres;
         var keywords = docs.keywords;
         var favorites = docs.favorites;
+        var images = docs.images;
         var check = req.session.currentUser;
 
         // res.json(docs);
-        res.render('yourprofileace', { check:check, favorites: favorites, username: username, video: video, location: location, name: name, act: act, primary: primary, secondary: secondary, links: links, aspirations: aspirations, genres: genres, keywords: keywords })
+        res.render('yourprofileace', { images:images, check:check, favorites: favorites, username: username, video: video, location: location, name: name, act: act, primary: primary, secondary: secondary, links: links, aspirations: aspirations, genres: genres, keywords: keywords })
         }
     } else {
       // throw err;
@@ -395,9 +402,10 @@ controller.get('/:id', function(req,res, next){
       var aspirations = docs.aspirations;
       var genres = docs.genres;
       var keywords = docs.keywords;
+      var images = docs.images;
       check = req.session.currentUser;
       // res.json(docs);
-      res.render('yourprofileace', {check: check, username: username, video: video, location: location, name: name, act: act, primary: primary, secondary: secondary, links: links, aspirations: aspirations, genres: genres, keywords: keywords })
+      res.render('yourprofileace', { images: images, check: check, username: username, video: video, location: location, name: name, act: act, primary: primary, secondary: secondary, links: links, aspirations: aspirations, genres: genres, keywords: keywords })
     }
     }
     else{

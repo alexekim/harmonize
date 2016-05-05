@@ -72,7 +72,43 @@ $(function(){
   $(".element").typed({
     strings: ["drummer", "violist", "keyboardist", "synthgod", "violinist", "pig squealer", "soprano", "saxophonist", "flutist", "guitarist", "bassist", "harmonica god", "accordionist", "organist", "oboist", "cellist", "noise guitarist", "headbanger", "rapper", "diva", "acoustic guitarist", "drummer", "violist", "keyboardist", "synthgod", "violinist", "pig squealer", "soprano", "saxophonist", "flutist", "guitarist", "bassist", "harmonica god", "accordionist", "organist", "oboist", "cellist", "noise guitarist", "headbanger", "rapper", "diva","drummer", "violist", "keyboardist", "synthgod", "violinist", "pig squealer", "soprano", "saxophonist", "flutist", "guitarist", "bassist", "harmonica god", "accordionist", "organist", "oboist", "cellist", "noise guitarist", "headbanger", "rapper", "diva","drummer", "violist", "keyboardist", "synthgod", "violinist", "pig squealer", "soprano", "saxophonist", "flutist", "guitarist", "bassist", "harmonica god", "accordionist", "organist", "oboist", "cellist", "noise guitarist", "headbanger", "rapper", "diva" ],
     typeSpeed: 100,
-    showCursor: true,
+    showCursor: false,
     backSpeed: 40
   });
+});
+
+
+
+// image upload?
+var base64image = '';
+
+function readURL(input) {
+      if (input.files && input.files[0]) {
+          var reader = new FileReader();
+
+          reader.onload = function (e) {
+             $("#myImage").val(e.target.result)
+             base64image = e.target.result;
+          };
+          reader.readAsDataURL(input.files[0]);
+        }
+};
+
+var contributeData = {}
+$("e").submit(function(e) {
+  e.preventDefault();
+  contributeData.image = base64image;
+  $.ajax({
+    url:  "../images/",
+    data: contributeData,
+    type: "POST",
+    success: function(what) {
+      console.log('I did it');
+      console.log(what);
+      location.href = "/thankyou"
+    },
+    error: function(err) {
+      console.log(err);
+    }
+  })
 });
