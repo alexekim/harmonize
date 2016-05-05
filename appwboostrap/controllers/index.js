@@ -4,13 +4,19 @@ var controller = express.Router();
 /* GET home page. */
 controller.get('/', function(req, res, next) {
   check = req.session.currentUser;
-  res.render('index', { check: check, title: 'melody: musician connect', greeting: 'suh dude' });
+  res.render('index', { check: check, title: 'melody', greeting: 'suh dude' });
 });
 
-controller.get('/hey', function(req, res, next) {
-  res.render('violin', { title: 'melody: musician connect', greeting: 'suh dude' });
+controller.get('/about', function(req, res, next) {
+  check = req.session.currentUser;
+  res.render('about', { check: check, title: 'melody', greeting: 'suh dude' });
 });
 
+// controller.get('/hey', function(req, res, next) {
+//   res.render('violin', { title: 'melody: musician connect', greeting: 'suh dude' });
+// });
+
+//SETTINGS PAGE
 controller.get('/settings', function(req, res, next){
   if (req.session.loggedIn === true) {
     user = "for "+req.session.currentUser;
